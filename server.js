@@ -27,9 +27,8 @@ app.use('/teknisi', teknisi)
 
 app.get("/", (req, res) => {
 
-    res.redirect('/auth/login')
+  res.redirect('/auth/login')
 
- 
 });
 
 //----------------------------------

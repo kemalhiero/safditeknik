@@ -22,11 +22,11 @@ controller.tampilregister = async function (req, res) {
 controller.login = async function (req, res) {
   //Cek email
   const user = await model.findOne({ where: { email: req.body.email } });
-  if (!user) return res.status(400).send("Email tidak ditemukan");
+  if (!user) return res.send("Email tidak ditemukan");
 
   //Cek Password
   const validPass = await bcrypt.compare(req.body.password, user.password);
-  if (!validPass) return res.status(400).send("Password Salah");
+  if (!validPass) return res.send("Password Salah");
 
   const nama = user.name;
   const email = user.email;
@@ -55,7 +55,7 @@ controller.login = async function (req, res) {
 
 controller.register = async function (req, res) {
   const { name, email, password, confPassword, role } = req.body;
-  if (password !== confPassword) return res.status(400).json({ msg: "Password dan Confirm Password tidak cocok" });
+  if (password !== confPassword) return res.json({ msg: "Password dan Confirm Password tidak cocok" });
   const salt = await bcrypt.genSalt();
   const hashPassword = await bcrypt.hash(password, salt);
 
@@ -75,6 +75,29 @@ controller.register = async function (req, res) {
   }
 
   //redirect ke halaman login
+};
+
+controller.logout = async function (req, res) {
+  const token = req.cookies.token;
+  if (!token) return res.json("Token tidak ada");
+  const tokenDecoded = jwt.verify(token, process.env.TOKEN);
+  const user = await model.findOne({
+    where: {
+      email: tokenDecoded.email,
+    },
+  });
+  if (!user) return res.status(200).json("User tidak ada");
+  const id = user.id;
+  await model.update({ remember_token: null },
+       { where: {id: id,},
+    }
+  );
+  res
+    .clearCookie("token")
+    .redirect("/auth/login")
+    // .locals = null;
+    
+
 };
 
 module.exports = controller;
