@@ -55,17 +55,16 @@
                                     <form action="{{ route('register.store') }}" method="post">
                                         <div class="mb-4">
                                             <label for="email" class="form-label">Email</label>
-                                            <input class="form-control me-2"
-                                                value="{{ old('email') }}" name="email" type="email">
+                                            <input class="form-control me-2" name="email" type="email">
                                         </div>
                                         <div class="mb-4">
                                             <label for="name" class="form-label">name</label>
-                                            <input type="text" value="{{ old('name') }}" name="name" id="name"
+                                            <input type="text" name="name" id="name"
                                                 class="form-control">
                                         </div>
                                         <div class="mb-4">
                                             <label for="password" class="form-label">password</label>
-                                            <input type="password" value="{{ old('password') }}" name="password"
+                                            <input type="password" name="password"
                                                 id="password" class="form-control">
                                         </div>
                                         <div class="mb-4">

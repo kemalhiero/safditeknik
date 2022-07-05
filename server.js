@@ -16,11 +16,26 @@ app.set("view engine", "ejs");
 app.use(express.static("public"));
 
 // Router
+const admin = require("./router/admin")
+app.use('/admin', admin)
+
+const auth = require("./router/auth")
+app.use('/auth', auth)
+
 const teknisi = require("./router/teknisi")
 app.use('/teknisi', teknisi)
 
+app.get("/", (req, res) => {
 
+    res.redirect('/auth/login')
 
+ 
+});
+
+//----------------------------------
+app.use("/", (req, res) => {
+  res.send("eror 404 ges, halamannnya ngga ketemu");
+});
 
 app.listen(port, () => {
   console.log(`Server Sedang Berjalan di http://localhost:${port}`);
