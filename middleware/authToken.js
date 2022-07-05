@@ -1,11 +1,11 @@
-// require('dotenv').config
-// const jwt = require('jsonwebtoken');
+require('dotenv').config
+const jwt = require('jsonwebtoken');
 
-// function isAdmin(req,res,next) {
+function isAdmin(req,res,next) {
 
     const token = req.cookies.token
 
-//     if(token){
+    if(token){
 
     jwt.verify(token, process.env.TOKEN, (err, decodedToken) =>{
         if(err){
@@ -23,11 +23,11 @@
     }
 }
 
-// function isTeknisi(req,res,next) {
+function isTeknisi(req,res,next) {
 
     const token = req.cookies.token
 
-//     if(token){
+    if(token){
 
     jwt.verify(token, process.env.TOKEN, (err, decodedToken) =>{
         if(err){
@@ -45,8 +45,8 @@
     }
 }
 
-// const checkUser = (req,res,next) =>{
-//     const token = req.cookies.jwt
+const checkUser = (req,res,next) =>{
+    const token = req.cookies.jwt
 
     if(token){
         jwt.verify(token, process.env.TOKEN, async (err, decodedToken) => {
@@ -71,4 +71,4 @@
 }
 
 
-// module.exports = { isAdmin, isTeknisi , checkUser }
+module.exports = { isAdmin, isTeknisi , checkUser }

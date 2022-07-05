@@ -24,6 +24,10 @@ const barang_custumer = sequelize.define('barang_customer', {
     updated_at : {
         type : DataTypes.TIME
     },
+    deskripsi : {
+        type : DataTypes.STRING
+    },
+
 
 }, {
     tableName: 'barang_customer',

@@ -15,10 +15,10 @@ controller.tampilDaftarPelanggan = async function(req, res){
 
 controller.tampiltambahBarang = async function(req, res){
     const id = req.params.id;
-
+    const pelanggan = await model.customer.findOne({where:{id}, attributes: [ 'id', 'nama', 'no_hp', 'alamat']})
     const barang = await model.barang_customer.findAll({where: { id_pelanggan: id }    });
 
-    res.render("admin/tambah", {dasbord: "collapsed", perbaikan: "", barang});
+    res.render("admin/tambah", {dasbord: "collapsed", perbaikan: "", barang, pelanggan});
 }
 
 controller.tambahPelanggan = async function(req, res){
