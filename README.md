@@ -1,7 +1,7 @@
 # Tugas Besar PBD-Safdi Teknik
 
 - Tabel Relasi
-<img src="tabelrelasi.jpeg">
+<img src="er model pbd 6-gasss.jpg">
 
 -- Admin --
 <p>1. Admin Mendaftarkan Pelanggan</p>
