@@ -1,8 +1,4 @@
-@extends('admin.templateadmin')
-
-@section('title', 'Laporan Pembayaran')
-
-@section('content')
+<%- include('admin/templateadmin-atas', {judul: 'Laporan Pembayaran'}) %>
 
       <div class="row">
           <div class="card">
@@ -50,5 +46,5 @@
 
       </div>
 
-@endsection
+<%- include('admin/templateadmin-bawah') %> 
 

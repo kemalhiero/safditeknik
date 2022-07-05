@@ -1,8 +1,4 @@
-@extends('admin.templateadmin')
-
-@section('title', 'Pendaftaran Pelanggan')
-
-@section('content')
+<%- include('admin/templateadmin-atas', {judul: 'Pendaftaran Pelanggan'}) %>
 
           <div class="card">
             <div class="card-body">
@@ -103,4 +99,4 @@
             </div>
           </div>
 
-@endsection
+<%- include('admin/templateadmin-bawah') %> 
