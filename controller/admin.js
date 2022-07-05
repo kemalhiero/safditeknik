@@ -8,12 +8,51 @@ controller.tampilDashboardAdmin = async function(req, res){
 }
 
 controller.tampilDaftarPelanggan = async function(req, res){
-    res.render("admin/pelanggan", {});
+    const pelanggan = await model.customer.findAll();
+
+    res.render("admin/pelanggan", {dasbord: "collapsed", perbaikan: "", pelanggan});
 }
 
 controller.tampiltambahBarang = async function(req, res){
-    res.render("admin/tambah", {});
+    const id = req.params.id;
+
+    const barang = await model.barang_customer.findAll({where: { id_pelanggan: id }    });
+
+    res.render("admin/tambah", {dasbord: "collapsed", perbaikan: "", barang});
 }
+
+controller.tambahPelanggan = async function(req, res){
+    const { name, no_hp, alamat } = req.body;
+
+    try {
+        await model.customer.create({
+            nama: name,
+            no_hp,
+            alamat
+        });
+        res.redirect('back');
+    } catch (error) {
+        console.log(error);
+    }
+
+}
+
+controller.tambahBarang = async function(req, res){
+    const { nama_barang, deskripsi,id_pelanggan } = req.body;
+
+    try {
+        await model.barang_customer.create({
+            id_pelanggan,
+            nama_barang,
+            deskripsi
+        });
+        res.redirect('back');
+    } catch (error) {
+        console.log(error);
+    }
+
+}
+
 
 
 module.exports = controller;

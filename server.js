@@ -18,13 +18,13 @@ app.use(express.static("public"));
 
 // Router
 const admin = require("./router/admin")
-app.use('/admin',isAdmin, admin)
+app.use('/admin', admin)
 
 const auth = require("./router/auth")
 app.use('/auth', auth)
 
 const teknisi = require("./router/teknisi")
-app.use('/teknisi',isTeknisi, teknisi)
+app.use('/teknisi', teknisi)
 
 app.get("/", (req, res) => {
 
