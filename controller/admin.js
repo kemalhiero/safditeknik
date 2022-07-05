@@ -4,7 +4,7 @@ const sequelize = model.dbconfig;
 const controller = {};
 
 controller.tampilDashboardAdmin = async function(req, res){
-    res.render("admin/dashboard", {});
+    res.render("admin/dashboard", {dasbord: "", perbaikan: "collapsed"});
 }
 
 controller.tampilDaftarPelanggan = async function(req, res){

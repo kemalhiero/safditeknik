@@ -48,14 +48,13 @@ controller.login = async function (req, res) {
       httpOnly: true,
       maxAge: 24 * 60 * 60 * 1000,
     })
-    // .json({token})
     .redirect("/");
 
 };
 
 controller.register = async function (req, res) {
-  const { name, email, password, confPassword, role } = req.body;
-  if (password !== confPassword) return res.json({ msg: "Password dan Confirm Password tidak cocok" });
+  const { name, email, password, role } = req.body;
+
   const salt = await bcrypt.genSalt();
   const hashPassword = await bcrypt.hash(password, salt);
 
@@ -74,7 +73,6 @@ controller.register = async function (req, res) {
     console.log(error);
   }
 
-  //redirect ke halaman login
 };
 
 controller.logout = async function (req, res) {

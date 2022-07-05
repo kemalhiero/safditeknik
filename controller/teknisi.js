@@ -4,11 +4,11 @@ const sequelize = model.dbconfig;
 const controller = {};
 
 controller.tampilDashboardTeknisi = async function(req, res){
-    res.render("teknisi/dashboard", {});
+    res.render("teknisi/dashboard", {dasbord: "", perbaikan: "collapsed"});
 }
 
 controller.tampilPerbaikan = async function(req, res){
-    res.render("teknisi/perbaikan", {});
+    res.render("teknisi/perbaikan", {dasbord: "collapsed", perbaikan: ""});
 }
 
 
