@@ -3,45 +3,45 @@ const jwt = require('jsonwebtoken');
 
 function isAdmin(req,res,next) {
 
-    const token = req.cookies.jwt
+    const token = req.cookies.token
 
     if(token){
 
-    jwt.verify(token, process.env.TOKEN_SECRET, (err, decodedToken) =>{
+    jwt.verify(token, process.env.TOKEN, (err, decodedToken) =>{
         if(err){
             console.log(err.message)
-            res.render('500')
+            res.send("500")
         }else{
             // console.log(decodedToken);
             const role = decodedToken.role
-            if(role != 'admin') return res.render('500')
+            if(role != 'admin') return res.send(err)
             next()
         }
     })
 } else{
-    res.render('500')
+    res.send("Error")
     }
 }
 
 function isTeknisi(req,res,next) {
 
-    const token = req.cookies.jwt
+    const token = req.cookies.token
 
     if(token){
 
-    jwt.verify(token, process.env.TOKEN_SECRET, (err, decodedToken) =>{
+    jwt.verify(token, process.env.TOKEN, (err, decodedToken) =>{
         if(err){
             console.log(err.message)
-            res.render('500')
+            res.send("500")
         }else{
             // console.log(decodedToken);
             const role = decodedToken.role
-            if(role != 'teknisi') return res.render('500')
+            if(role != 'teknisi') return res.send(err)
             next()
         }
     })
 } else{
-    res.render('500')
+    res.send("500")
     }
 }
 
@@ -49,7 +49,7 @@ const checkUser = (req,res,next) =>{
     const token = req.cookies.jwt
 
     if(token){
-        jwt.verify(token, process.env.TOKEN_SECRET, async (err, decodedToken) => {
+        jwt.verify(token, process.env.TOKEN, async (err, decodedToken) => {
           if (err) {
             console.log(err.message);
             res.locals.user = null
@@ -58,14 +58,14 @@ const checkUser = (req,res,next) =>{
             res.locals.user = decodedToken
             res.locals.email = decodedToken.email
             res.locals.nama = decodedToken.nama
-            res.locals.type = decodedToken.type
+            res.locals.role = decodedToken.role
             next();
           }
         });
     }else{
         res.locals.user = null
         res.locals.nama = ''
-        res.locals.type = ''
+        res.locals.role = ''
         next()
     }
 }

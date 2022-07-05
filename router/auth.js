@@ -7,8 +7,7 @@ router.use(express.static("public"));
 
 router.post("/register", controller.auth.register);
 router.post("/login", controller.auth.login);
-router.post("/logout", controller.auth.logout);
-
+router.get("/logout", controller.auth.logout);
 router.get("/login", controller.auth.tampillogin);
 router.get("/register", controller.auth.tampilregister);
 
