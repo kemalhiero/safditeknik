@@ -19,9 +19,7 @@ app.use(express.static("public"));
 const teknisi = require("./router/teknisi")
 app.use('/teknisi', teknisi)
 
-app.get("/", (req, res) => {
-    res.render('teknisi/app-teknisi.ejs')
-});
+
 
 
 app.listen(port, () => {

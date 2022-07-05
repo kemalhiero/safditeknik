@@ -1,7 +1,7 @@
 const { Sequelize } = require('sequelize');
 
-const dbconfig = new Sequelize('loki', 'root', '', {
-    host: 'localhost',
+const dbconfig = new Sequelize('pbd_safditeknik', 'postgres', '12345', {
+    host: '127.0.0.1',
     dialect: 'postgres'
   });
 
