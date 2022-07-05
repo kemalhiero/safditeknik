@@ -4,6 +4,10 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
+//JWT
+maxAge = 3 * 24 * 60 * 60;
+ms = 1000;
+
 function generateAccessToken(email) {
   return jwt.sign(email, process.env.TOKEN, { expiresIn: "1d" });
 }
@@ -43,12 +47,12 @@ controller.login = async function (req, res) {
     }
   );
 
-  res
-    .cookie("token", token, {
-      httpOnly: true,
-      maxAge: 24 * 60 * 60 * 1000,
-    })
-    .redirect("/");
+  res.cookie('token', token, {httponly: true, maxAge: maxAge * ms})
+    if(user.role == 'admin'){
+      res.status(200).redirect('/admin')
+    }else if(user.role == 'teknisi'){
+      res.status(200).redirect('/teknisi/')
+    }
 
 };
 
@@ -76,26 +80,8 @@ controller.register = async function (req, res) {
 };
 
 controller.logout = async function (req, res) {
-  const token = req.cookies.token;
-  if (!token) return res.json("Token tidak ada");
-  const tokenDecoded = jwt.verify(token, process.env.TOKEN);
-  const user = await model.findOne({
-    where: {
-      email: tokenDecoded.email,
-    },
-  });
-  if (!user) return res.status(200).json("User tidak ada");
-  const id = user.id;
-  await model.update({ remember_token: null },
-       { where: {id: id,},
-    }
-  );
-  res
-    .clearCookie("token")
-    .redirect("/auth/login")
-    // .locals = null;
-    
-
+  res.cookie('token', '',{ maxAge: 1})
+  res.redirect('/auth/login')
 };
 
 module.exports = controller;

@@ -16,6 +16,7 @@ app.use(cookieParser());
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 
+app.get("*", checkUser)
 // Router
 const admin = require("./router/admin")
 app.use('/admin', admin)
