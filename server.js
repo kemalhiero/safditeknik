@@ -15,10 +15,12 @@ app.use(cookieParser());
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 
-
+// Router
+const teknisi = require("./router/teknisi")
+app.use('/teknisi', teknisi)
 
 app.get("/", (req, res) => {
-    res.send('oppppp')
+    res.render('teknisi/app-teknisi.ejs')
 });
 
 
