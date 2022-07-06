@@ -19,7 +19,7 @@ app.use(express.static("public"));
 app.get("*", checkUser)
 // Router
 const admin = require("./router/admin")
-app.use('/admin', admin)
+app.use('/admin', isAdmin, admin)
 
 const auth = require("./router/auth")
 app.use('/auth', auth)

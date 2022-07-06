@@ -11,7 +11,7 @@
 
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title">Identitas Teknisi</h5>
+                                <!-- <h5 class="card-title">Identitas Teknisi</h5>
                                 <div class="row">
                                     <div class="col-md-4">Nama</div>
                                     <div class="col-md-8">lorem</div>
@@ -23,7 +23,7 @@
                                 <div class="row">
                                     <div class="col-md-4">Alamat</div>
                                     <div class="col-md-8">lorem</div>
-                                </div>
+                                </div> -->
                                 <br>
 
                                 <!-- Table with stripped rows -->
@@ -43,7 +43,13 @@
                                             <th scope="row"><%= index+1 %></th>
                                             <td><%= brg.nama_barang %></td>
                                             <td><%= brg.deskripsi %></td>
-                                            <td>Sedang diperbaiki</td>
+                                            <td>
+                                                <% if (brg.status=="" || brg.status==null) { %>
+                                                    Sedang Diperbaiki
+                                                <% } else{%>
+                                                    <%= brg.status %> 
+                                                <% } %> 
+                                            </td>
                                             <td>
                                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                                     data-bs-target="#basicModal<%= index+1 %>">
@@ -53,7 +59,8 @@
                                                 <div class="modal fade" id="basicModal<%= index+1 %>" tabindex="-1">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
-                                                            <form action="/teknisi/gantiStatus" method="post">
+                                                            <form action="/teknisi/ubahStatus" method="post">
+                                                                <input type="hidden" name="id_barang" value="<%= brg.id %>">
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title">Ganti Status</h5>
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
@@ -61,28 +68,17 @@
                                                             </div>
                                                             <div class="modal-body">
                                                                 <div class="row mb-3">
-                                                                    <fieldset class="row mb-3">
-                                                                        <legend class="col-form-label col-sm-2 pt-0">Pilihan</legend>
-                                                                        <div class="col-sm-10">
-                                                                            <div class="form-check">
-                                                                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="tidak-bisa" checked>
-                                                                            <label class="form-check-label" for="gridRadios1">
-                                                                                Tidak bisa diperbaiki
-                                                                            </label>
-                                                                            </div>
-                                                                            <div class="form-check">
-                                                                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="selesai">
-                                                                            <label class="form-check-label" for="gridRadios2">
-                                                                                Selesai Perbaikan
-                                                                            </label>
-                                                                            </div>
-                                                                        </div>
-                                                                        </fieldset>
+                                                                    <select class="form-select" aria-label="Default select example" name="status">
+                                                                        <option selected>Pilih Status</option>
+                                                                        <option value="">Sedang diperbaiki</option>
+                                                                        <option value="Tidak bisa diperbaiki">Tidak bisa diperbaiki</option>
+                                                                        <option value="Selesai diperbaiki">Selesai diperbaiki</option>
+                                                                      </select>
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                                <button type="submit" class="btn btn-primary">Tambah</button>
+                                                                <button type="submit" class="btn btn-primary">Edit</button>
                                                             </div>
                                                             </form>
                                                         </div>

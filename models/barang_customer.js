@@ -27,6 +27,9 @@ const barang_custumer = sequelize.define('barang_customer', {
     deskripsi : {
         type : DataTypes.STRING
     },
+    status : {
+        type : DataTypes.STRING
+    },
 
 
 }, {

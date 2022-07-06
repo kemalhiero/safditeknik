@@ -8,4 +8,6 @@ router.use(express.static("public"));
 router.get("/", controller.teknisi.tampilDashboardTeknisi);
 router.get("/perbaikan", controller.teknisi.tampilPerbaikan);
 
+router.post("/ubahStatus", controller.teknisi.ubahStatus);
+
 module.exports = router;

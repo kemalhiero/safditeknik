@@ -14,4 +14,22 @@ controller.tampilPerbaikan = async function(req, res){
 }
 
 
+controller.ubahStatus = async function(req, res){
+
+    const { id_barang, status } = req.body;
+
+    try {
+        await model.barang_customer.update({
+            status
+        },{
+            where : { id:id_barang }
+        });
+        res.redirect('back');
+        // res.send(status)
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
 module.exports = controller;
