@@ -32,21 +32,64 @@
                                         <tr>
                                             <th scope="col">#</th>
                                             <th scope="col">Name Barang</th>
+                                            <th scope="col">Deskripsi</th>
                                             <th scope="col">Status</th>
                                             <th scope="col">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <% barang.forEach(function(brg, index) { %>
                                         <tr>
-                                            <th scope="row">1</th>
-                                            <td>Kipas Angin</td>
+                                            <th scope="row"><%= index+1 %></th>
+                                            <td><%= brg.nama_barang %></td>
+                                            <td><%= brg.deskripsi %></td>
                                             <td>Sedang diperbaiki</td>
                                             <td>
                                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                    data-bs-target="#basicModal">
+                                                    data-bs-target="#basicModal<%= index+1 %>">
                                                     Edit Status
                                                 </button></td>
+
+                                                <div class="modal fade" id="basicModal<%= index+1 %>" tabindex="-1">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <form action="/teknisi/gantiStatus" method="post">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title">Ganti Status</h5>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                    aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="row mb-3">
+                                                                    <fieldset class="row mb-3">
+                                                                        <legend class="col-form-label col-sm-2 pt-0">Pilihan</legend>
+                                                                        <div class="col-sm-10">
+                                                                            <div class="form-check">
+                                                                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="tidak-bisa" checked>
+                                                                            <label class="form-check-label" for="gridRadios1">
+                                                                                Tidak bisa diperbaiki
+                                                                            </label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="selesai">
+                                                                            <label class="form-check-label" for="gridRadios2">
+                                                                                Selesai Perbaikan
+                                                                            </label>
+                                                                            </div>
+                                                                        </div>
+                                                                        </fieldset>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                <button type="submit" class="btn btn-primary">Tambah</button>
+                                                            </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                         </tr>
+                                        <% }) %>
                                     </tbody>
                                 </table>
                                 <!-- End Table with stripped rows -->
@@ -58,44 +101,7 @@
                 </div>
             </section>
 
-            <div class="modal fade" id="basicModal" tabindex="-1">
-                <div class="modal-dialog">
-                    <form action="">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title">Basic Modal</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="row mb-3">
-                                    <fieldset class="row mb-3">
-                                        <legend class="col-form-label col-sm-2 pt-0">Radios</legend>
-                                        <div class="col-sm-10">
-                                          <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-                                            <label class="form-check-label" for="gridRadios1">
-                                              Tidak bisa diperbaiki
-                                            </label>
-                                          </div>
-                                          <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-                                            <label class="form-check-label" for="gridRadios2">
-                                              Selesai Perbaikan
-                                            </label>
-                                          </div>
-                                        </div>
-                                      </fieldset>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Tambah</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div><!-- End Basic Modal-->
+
 
 
 

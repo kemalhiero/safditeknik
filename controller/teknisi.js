@@ -8,7 +8,9 @@ controller.tampilDashboardTeknisi = async function(req, res){
 }
 
 controller.tampilPerbaikan = async function(req, res){
-    res.render("teknisi/perbaikan", {dasbord: "collapsed", perbaikan: ""});
+    const barang = await model.barang_customer.findAll({});
+
+    res.render("teknisi/perbaikan", {dasbord: "collapsed", perbaikan: "", barang});
 }
 
 
